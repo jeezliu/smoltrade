@@ -1,0 +1,41 @@
+# Example configuration for LLM-based trading bot
+# Copy this file and customize for your needs
+
+# Basic trading configuration
+symbol = "AAPL"
+cash = 10000.0
+data_interval = "1d"
+timezone = "America/New_York"
+
+# Risk management
+risk_per_trade = 0.1
+max_position_pct = 0.25
+slippage_bps = 5.0
+commission = 0.0
+
+# LLM Configuration
+llm_enabled = true
+llm_api_key = "your-openai-api-key-here"  # Replace with your actual API key
+llm_model = "gpt-4"
+# llm_base_url = "https://api.openai.com/v1"  # Uncomment for custom endpoint
+llm_temperature = 0.1
+llm_max_tokens = 1000
+
+# LLM Decision Parameters
+llm_min_confidence = 0.6
+llm_enable_risk_filter = true
+llm_min_decision_interval_minutes = 30
+
+# Scheduling Configuration
+llm_schedule_interval_minutes = 60
+llm_market_hours_only = true
+
+# Data source and broker
+data_source = "yfinance"
+broker = "paper"
+
+# Optional metadata
+[metadata]
+strategy_name = "LLM Agent"
+description = "LLM-based trading with market analysis"
+minimum_confidence = 0.005
