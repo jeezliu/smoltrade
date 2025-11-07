@@ -46,17 +46,17 @@ class MovingAverageCrossStrategy(BaseStrategy):
         short_ma = prices.rolling(self.short_window).mean()
         long_ma = prices.rolling(self.long_window).mean()
 
-        latest_short = short_ma.iloc[-1]
-        latest_long = long_ma.iloc[-1]
-        prev_short = short_ma.iloc[-2]
-        prev_long = long_ma.iloc[-2]
+        latest_short = short_ma.iloc[-1].item()
+        latest_long = long_ma.iloc[-1].item()
+        prev_short = short_ma.iloc[-2].item()
+        prev_long = long_ma.iloc[-2].item()
 
-        if pd.isna(latest_short) or pd.isna(latest_long) or pd.isna(prev_short) or pd.isna(prev_long):
+        if pd.isna([latest_short, latest_long, prev_short, prev_long]).any():
             return None
 
         signal_time = data.index[-1].to_pydatetime()
         difference = latest_short - latest_long
-        confidence = abs(difference) / latest_long if latest_long else 0.0
+        confidence = abs(difference) / latest_long if latest_long > 0 else 0.0
 
         current_position = portfolio.position_size(self.symbol)
         has_position = current_position > 0

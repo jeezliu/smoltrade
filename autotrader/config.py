@@ -32,6 +32,19 @@ class BotConfig:
     slippage_bps: float = 5.0
     commission: float = 0.0
 
+    # LLM Agent Configuration
+    llm_enabled: bool = False
+    llm_api_key: str = ""
+    llm_model: str = "gpt-4"
+    llm_base_url: Optional[str] = None
+    llm_temperature: float = 0.1
+    llm_max_tokens: int = 1000
+    llm_min_confidence: float = 0.6
+    llm_enable_risk_filter: bool = True
+    llm_min_decision_interval_minutes: int = 30
+    llm_schedule_interval_minutes: int = 60
+    llm_market_hours_only: bool = True
+
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
